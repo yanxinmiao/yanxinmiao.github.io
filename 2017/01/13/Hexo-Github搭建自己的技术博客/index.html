@@ -111,7 +111,8 @@
 添加sitemap和feed插件
 添加404 公益页面">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-08990d14ceff0a9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-16T03:02:36.839Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-8e3e0222b888305f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-16T03:05:29.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Github搭建自己的技术博客">
 <meta name="twitter:description" content="摘要: 使用hexo + github 搭建自己的博客，大概可以分为以下几个步骤
@@ -386,22 +387,30 @@
 <li>配置Hexo</li>
 <li>怎样将Hexo与github page 联系起来</li>
 <li>怎样发布文章</li>
-<li>主题 推荐</li>
+<li>主题推荐</li>
 <li>主题Net的简单配置</li>
 <li>添加sitemap和feed插件</li>
 <li>添加404 公益页面</li>
 </ol>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo n #写文章</div><div class="line">hexo g #生成</div><div class="line">hexo d #部署 # 可与hexo g合并为 hexo d -g</div></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ul>
 <li>在浏览器中打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> ，显示无法访问此网站 ，<strong>localhost</strong> 拒绝了我们的连接请求。 。<br>在网上查了下资料，都说是IIS服务器问题 。需要在控制面板中打开 ，<br>具体流程是 （以下是win10的）：打开控制面板 —— 程序和功能 —— 左侧栏的“启用或关闭Windows功能”，把“Internet Information Services”点上。其中有个FTP服务器可以不开。点确定后就自动安装上了。再打开浏览器，输入localhost就行了</li>
-</ol>
+</ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/1951128-08990d14ceff0a9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ截图20170113152940.png"></p>
 <p>如果还是打不开<a href="http://localhost:4000/，" target="_blank" rel="external">http://localhost:4000/，</a> 可能是hexo server 的问题 或者 4000端口占用<br>我是通过下面这个办法解决的 。<br>Hexo 3.0 把服务器独立成了个别模块，您必须先安装 hexo-server 才能使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-server --save</div></pre></td></tr></table></figure></p>
 <p>安装完成后，输入以下命令以启动服务器，您的网站会在 <a href="http://localhost/" target="_blank" rel="external">http://localhost</a>:4000 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，您无须重启服务器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
-<ol>
+<ul>
 <li>在执行 hexo new post “article title” 新建一篇博客时 ，报错  can not read a block mapping entry; a multiline key may not be an implicit key at line 72, column 5:</li>
-</ol>
+</ul>
 <p>这个是因为在hexo_config.yml 这个配置文件中 ，字段对应的值 有加空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repo: git@github.com:***/***.github.io.git</div><div class="line">branch: master</div></pre></td></tr></table></figure></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="external">手把手教你用Hexo+Github 搭建属于自己的博客</a><br><a href="http://www.williamlong.info/archives/4319.html" target="_blank" rel="external">好用的Markdown编辑器一览</a><br><a href="http://www.csdn.net/article/2014-05-05/2819623" target="_blank" rel="external">10款流行的Markdown编辑器，总有一款适合你</a></p>
+<ul>
+<li>执行发布命令时 ，E:\work\hexo&gt;hexo d  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">You should configure deployment settings in _config.yml first!</div><div class="line">Available deployer plugins:git</div><div class="line">For more help, you can check the online docs: [http://hexo.io/](http://hexo.io/)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在网上查了大量资料，都说是yml文件格式错了，正确的如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1951128-8e3e0222b888305f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ截图20170116105147.png"></p>
+<p>1位置处 是两个空格，2位置处是一个空格，我就是把1位置的两个空格都删了，导致文件发布失败。<br><a href="http://mbyte.me/2016/02/22/hexo-deply%E6%8F%90%E7%A4%BAYou-should-configure-deployment-settings-in-config-yml-first-Available-Types-git/" target="_blank" rel="external">具体参考此文</a></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo 官网</a><br><a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="external">手把手教你用Hexo+Github 搭建属于自己的博客</a><br><a href="http://www.williamlong.info/archives/4319.html" target="_blank" rel="external">好用的Markdown编辑器一览</a><br><a href="http://www.csdn.net/article/2014-05-05/2819623" target="_blank" rel="external">10款流行的Markdown编辑器，总有一款适合你</a><br><a href="https://www.v2ex.com/t/264283" target="_blank" rel="external">Hexo 部署 Github， Coding 进行国内外分流最全教程</a><br><a href="http://blog.csdn.net/yuzhiyun3536/article/details/53223048" target="_blank" rel="external"> <a href="http://blog.csdn.net/yuzhiyun3536/article/details/53223048" target="_blank" rel="external">github hexo搭建博客出现的错误记录</a></a></p>
 
       
     </div>
