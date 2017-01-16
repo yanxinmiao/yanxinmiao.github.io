@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="技术分享," />
 
 
 
@@ -84,44 +84,47 @@
 
 
 
-<meta name="description" content="Hexo 简介Hexo 是一个基于nodejs 的静态博客网站生成器，作者是来自台湾的 Tommy Chen 。有以下特点：
+<meta name="description" content="摘要:使用hexo + github 搭建自己的博客，大概可以分为以下几个步骤
 
-不可思议的快速 ─ 只要一眨眼静态文件即生成完成
-支持 Markdown
-仅需一道指令即可部署到 GitHub Pages 和 Heroku
-已移植 Octopress 插件
-高扩展性、自订性
-兼容于 Windows, Mac &amp;amp; Linux
-
-使用hexo +">
+搭建环境准备（包括node.js和git环境，gitHub账户的配置）
+安装Hexo
+配置Hexo
+怎样将Hexo与github page 联系起来
+怎样发布文章
+主题 推荐
+主题Net的简单配置
+添加sitemap和feed插件
+添加404 公益页面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo+Github搭建自己的技术博客">
 <meta property="og:url" content="https://yanxinmiao.github.io/2017/01/13/Hexo-Github搭建自己的技术博客/index.html">
 <meta property="og:site_name" content="Android技术博客">
-<meta property="og:description" content="Hexo 简介Hexo 是一个基于nodejs 的静态博客网站生成器，作者是来自台湾的 Tommy Chen 。有以下特点：
+<meta property="og:description" content="摘要:使用hexo + github 搭建自己的博客，大概可以分为以下几个步骤
 
-不可思议的快速 ─ 只要一眨眼静态文件即生成完成
-支持 Markdown
-仅需一道指令即可部署到 GitHub Pages 和 Heroku
-已移植 Octopress 插件
-高扩展性、自订性
-兼容于 Windows, Mac &amp;amp; Linux
-
-使用hexo +">
+搭建环境准备（包括node.js和git环境，gitHub账户的配置）
+安装Hexo
+配置Hexo
+怎样将Hexo与github page 联系起来
+怎样发布文章
+主题 推荐
+主题Net的简单配置
+添加sitemap和feed插件
+添加404 公益页面">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-08990d14ceff0a9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-16T02:56:51.543Z">
+<meta property="og:updated_time" content="2017-01-16T03:01:14.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Github搭建自己的技术博客">
-<meta name="twitter:description" content="Hexo 简介Hexo 是一个基于nodejs 的静态博客网站生成器，作者是来自台湾的 Tommy Chen 。有以下特点：
+<meta name="twitter:description" content="摘要:使用hexo + github 搭建自己的博客，大概可以分为以下几个步骤
 
-不可思议的快速 ─ 只要一眨眼静态文件即生成完成
-支持 Markdown
-仅需一道指令即可部署到 GitHub Pages 和 Heroku
-已移植 Octopress 插件
-高扩展性、自订性
-兼容于 Windows, Mac &amp;amp; Linux
-
-使用hexo +">
+搭建环境准备（包括node.js和git环境，gitHub账户的配置）
+安装Hexo
+配置Hexo
+怎样将Hexo与github page 联系起来
+怎样发布文章
+主题 推荐
+主题Net的简单配置
+添加sitemap和feed插件
+添加404 公益页面">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1951128-08990d14ceff0a9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -354,7 +357,20 @@
       
 
       
-        <h2 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h2><p>Hexo 是一个基于<a href="http://www.oschina.net/p/nodejs" target="_blank" rel="external">nodejs</a> 的静态博客网站生成器，作者是来自台湾的 <a href="http://mailto:tommy351@gmail.com/" target="_blank" rel="external">Tommy Chen</a> 。有以下特点：</p>
+        <p>摘要:使用hexo + github 搭建自己的博客，大概可以分为以下几个步骤</p>
+<ol>
+<li>搭建环境准备（包括node.js和git环境，gitHub账户的配置）</li>
+<li>安装Hexo</li>
+<li>配置Hexo</li>
+<li>怎样将Hexo与github page 联系起来</li>
+<li>怎样发布文章</li>
+<li>主题 推荐</li>
+<li>主题Net的简单配置</li>
+<li>添加sitemap和feed插件</li>
+<li>添加404 公益页面<a id="more"></a>
+</li>
+</ol>
+<h2 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h2><p>Hexo 是一个基于<a href="http://www.oschina.net/p/nodejs" target="_blank" rel="external">nodejs</a> 的静态博客网站生成器，作者是来自台湾的 <a href="http://mailto:tommy351@gmail.com/" target="_blank" rel="external">Tommy Chen</a> 。有以下特点：</p>
 <ul>
 <li>不可思议的快速 ─ 只要一眨眼静态文件即生成完成</li>
 <li>支持 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a></li>
@@ -406,6 +422,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术分享/" rel="tag"># 技术分享</a>
+          
+        </div>
       
 
       
@@ -482,6 +504,13 @@
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/标签">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
