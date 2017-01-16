@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改, 根据手机配置不同而不同, 可以通过如下命令查看:12$ adb shellshell@hwH60:/ $ cat /system/build.prop
-以手头的Huawei 荣耀6为例, heap s">
+<meta name="description" content="摘要: Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 内存管理">
 <meta property="og:url" content="https://yanxinmiao.github.io/2017/01/16/Android-内存管理/index.html">
 <meta property="og:site_name" content="Android技术博客">
-<meta property="og:description" content="Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改, 根据手机配置不同而不同, 可以通过如下命令查看:12$ adb shellshell@hwH60:/ $ cat /system/build.prop
-以手头的Huawei 荣耀6为例, heap s">
-<meta property="og:updated_time" content="2017-01-16T03:26:06.104Z">
+<meta property="og:description" content="摘要: Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改,">
+<meta property="og:updated_time" content="2017-01-16T03:32:01.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 内存管理">
-<meta name="twitter:description" content="Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改, 根据手机配置不同而不同, 可以通过如下命令查看:12$ adb shellshell@hwH60:/ $ cat /system/build.prop
-以手头的Huawei 荣耀6为例, heap s">
+<meta name="twitter:description" content="摘要: Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改,">
 
 
 
@@ -338,7 +335,8 @@
       
 
       
-        <p> Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改, 根据手机配置不同而不同, 可以通过如下命令查看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell</div><div class="line">shell@hwH60:/ $ cat /system/build.prop</div></pre></td></tr></table></figure></p>
+        <p>摘要: Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改,<br><a id="more"></a></p>
+<p> Android 系统给每个App可使用的Heap大小设定了一个阈值。这个值是系统设置的prop值, 系统编译时内置的, 保存在system/build.prop中. 一般国内的手机厂商都会做修改, 根据手机配置不同而不同, 可以通过如下命令查看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell</div><div class="line">shell@hwH60:/ $ cat /system/build.prop</div></pre></td></tr></table></figure></p>
 <p>以手头的Huawei 荣耀6为例, heap size相关的prop如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dalvik.vm.heapstartsize=8m</div><div class="line">dalvik.vm.heapgrowthlimit=192m</div><div class="line">dalvik.vm.heapsize=512m</div><div class="line">dalvik.vm.heaptargetutilization=0.75</div><div class="line">dalvik.vm.heapminfree=2m</div><div class="line">dalvik.vm.heapmaxfree=8m</div></pre></td></tr></table></figure></p>
 <p>其中:</p>
 <ul>
