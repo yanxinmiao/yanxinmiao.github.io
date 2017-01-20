@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://yanxinmiao.github.io/2017/01/20/Android-自动化测试相关研究/index.html">
 <meta property="og:site_name" content="Android技术博客">
 <meta property="og:description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
-<meta property="og:updated_time" content="2017-01-20T07:37:22.856Z">
+<meta property="og:updated_time" content="2017-01-20T07:43:41.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 自动化测试相关研究">
 <meta name="twitter:description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
@@ -353,7 +353,7 @@
 <p>这样就可以通过在CMD窗口中执行: adb shell monkey ｛+命令参数｝来进行Monkey测试了。 </p>
 <p>简单使用<br>连上设备，执行adb shell ——&gt; ls data/data ，查看可测试的应用程序包列表 ，然后执行monkey测试命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -p com.android.calculator2 -v 500</div></pre></td></tr></table></figure></p>
 <p>对几个常用命令做下解释：</p>
-<h4 id="常规命令"><a href="#常规命令" class="headerlink" title="常规命令"></a>常规命令</h4><ul>
+<h6 id="常规命令"><a href="#常规命令" class="headerlink" title="常规命令"></a>常规命令</h6><ul>
 <li><p>-help 列出简单用法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -help</div></pre></td></tr></table></figure>
 </li>
@@ -365,13 +365,13 @@
 </ul>
 </li>
 </ul>
-<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><ul>
+<h6 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h6><ul>
 <li>参数 -s 用于指定伪随机数生成器的seed值，如果seed相同，则两次Monkey测试所产生的事件序列也相同的。<br>示例：<br>　Monkey测试1：adb shell monkey -p com.htc.Weather –s 10 100<br>  Monkey 测试2：adb shell monkey -p com.htc.Weather–s 10 100<br> 两次测试的效果是相同的，因为模拟的用户操作序列（每次操作按照一定的先后顺序所组成的一系列操作，即一个序列）是一样的。操作序列虽   然是随机生成的，但是只要我们指定了相同的Seed值，就可以保证两次测试产生的随机操作序列是完全相同的，所以这个操作序列伪随机的。</li>
 <li>–throttle <milliseconds><br>在事件之间插入固定的时间（毫秒）延迟，你可以使用这个设置来减缓Monkey的运行速度，如果你不指定这个参数，则事件之间将没有延迟，事件将以最快的速度生成。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey --throttle 300 -v 10</div></pre></td></tr></table></figure>
 </milliseconds></li>
 </ul>
 <p>注：常用参数，一般设置为300毫秒，原因是实际用户操作的最快300毫秒左右一个动作事件，所以此处一般设置为300毫秒。</p>
-<h4 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h4><ul>
+<h6 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h6><ul>
 <li><p>其中-p用于约束限制，用此参数指定一个或多个包（Package，即App）。指定包之后，Monkey将只允许系统启动指定的APP ，允许访问这些包中的Activity。如果不指定包，Monkey将允许系统启动设备中的所有APP。</p>
 <ul>
 <li>指定一个包： adb shell monkey -p com.htc.Weather 100<br>说明：com.htc.Weather为包名，100是事件计数（即让Monkey程序模拟100次随机用户事件）。</li>
@@ -411,7 +411,7 @@
 </ul>
 <p>编写完脚本之后，放到手机sd卡，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -v -f /mnt/sdcard/HelloMonkey 1</div></pre></td></tr></table></figure></p>
 <p>脚本后面的数字1表示运行该脚本的次数</p>
-<h4 id="如何分析测试结果"><a href="#如何分析测试结果" class="headerlink" title="如何分析测试结果"></a>如何分析测试结果</h4><p>Monkey测试的og分析，我们可以通过几个关键词来判断测试是否通过。</p>
+<h6 id="如何分析测试结果"><a href="#如何分析测试结果" class="headerlink" title="如何分析测试结果"></a>如何分析测试结果</h6><p>Monkey测试的og分析，我们可以通过几个关键词来判断测试是否通过。</p>
 <ol>
 <li>Monkey finished<br>打开LOG，查看log的最下端，是否有类似以下字段：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## Network stats: elapsed time=5123ms (5123ms mobile, 0ms wifi, 0ms not connected)</div><div class="line">// Monkey finished</div></pre></td></tr></table></figure>
 </li>
@@ -621,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#稳定性测试利器-——-Monkey"><span class="nav-number">1.</span> <span class="nav-text">稳定性测试利器 —— Monkey</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常规命令"><span class="nav-number">2.</span> <span class="nav-text">常规命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件"><span class="nav-number">3.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束条件"><span class="nav-number">4.</span> <span class="nav-text">约束条件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#使用脚本"><span class="nav-number">4.0.1.</span> <span class="nav-text">使用脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何分析测试结果"><span class="nav-number">5.</span> <span class="nav-text">如何分析测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Monkey总结"><span class="nav-number">5.0.1.</span> <span class="nav-text">Monkey总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monkey之子-——-MonkeyRunner"><span class="nav-number">6.</span> <span class="nav-text">Monkey之子 —— MonkeyRunner</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#总结"><span class="nav-number">6.0.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rubotium"><span class="nav-number">7.</span> <span class="nav-text">Rubotium</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Espresso"><span class="nav-number">8.</span> <span class="nav-text">Espresso</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终极自动化测试框架-——-UI-Automator"><span class="nav-number">9.</span> <span class="nav-text">终极自动化测试框架 —— UI Automator</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Athrun"><span class="nav-number"></span> <span class="nav-text">Athrun</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number"></span> <span class="nav-text">参考文档</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#稳定性测试利器-——-Monkey"><span class="nav-number">1.</span> <span class="nav-text">稳定性测试利器 —— Monkey</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#常规命令"><span class="nav-number">1.0.1.</span> <span class="nav-text">常规命令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事件"><span class="nav-number">1.0.2.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#约束条件"><span class="nav-number">1.0.3.</span> <span class="nav-text">约束条件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用脚本"><span class="nav-number">1.0.4.</span> <span class="nav-text">使用脚本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如何分析测试结果"><span class="nav-number">1.0.5.</span> <span class="nav-text">如何分析测试结果</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Monkey总结"><span class="nav-number">1.0.6.</span> <span class="nav-text">Monkey总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monkey之子-——-MonkeyRunner"><span class="nav-number">2.</span> <span class="nav-text">Monkey之子 —— MonkeyRunner</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#总结"><span class="nav-number">2.0.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rubotium"><span class="nav-number">3.</span> <span class="nav-text">Rubotium</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Espresso"><span class="nav-number">4.</span> <span class="nav-text">Espresso</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终极自动化测试框架-——-UI-Automator"><span class="nav-number">5.</span> <span class="nav-text">终极自动化测试框架 —— UI Automator</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Athrun"><span class="nav-number"></span> <span class="nav-text">Athrun</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number"></span> <span class="nav-text">参考文档</span></a></div>
             
 
           </div>
