@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://yanxinmiao.github.io/2017/01/20/Android-自动化测试相关研究/index.html">
 <meta property="og:site_name" content="Android技术博客">
 <meta property="og:description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
-<meta property="og:updated_time" content="2017-01-20T07:52:14.507Z">
+<meta property="og:updated_time" content="2017-01-20T07:55:38.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 自动化测试相关研究">
 <meta name="twitter:description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
@@ -451,7 +451,10 @@
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>MonkeyRunner有很多强大并好用的API，并且支持录制回放和截图操作。同样它也不需源码，不需编译就可以直接运行。但MonkeyRunner和Monkey类似，也是基于控件坐标进行定位的，在实际项目中，控件坐标往往是最不稳定的，随时都有可能因为程序员对控件位置的调整而导致脚本运行失败。</p>
 <h2 id="Rubotium"><a href="#Rubotium" class="headerlink" title="Rubotium"></a>Rubotium</h2><blockquote>
 <p>要针对某一个APK进行自动化测试，APK可以有源码，也可以没有源码，功能强大；缺点是针对APK操作，而且需要对APK重新签名（有工具），因此操作相对复杂；</p>
-<h2 id="Espresso"><a href="#Espresso" class="headerlink" title="Espresso"></a>Espresso</h2><p><a href="https://testerhome.com/wiki/espresso" target="_blank" rel="external">Espresso 官方文档</a><br><a href="https://github.com/hehonghui/android-tech-frontier/blob/master/issue-11/Android-Espresso%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.md" target="_blank" rel="external">Android Espresso 测试框架介绍</a><br>Espresso 是一个提供了简单 API 的用于 android app UI 测试的测试框架。</p>
+<h2 id="Espresso"><a href="#Espresso" class="headerlink" title="Espresso"></a>Espresso</h2></blockquote>
+<p><a href="https://testerhome.com/wiki/espresso" target="_blank" rel="external">Espresso 官方文档</a><br><a href="https://github.com/hehonghui/android-tech-frontier/blob/master/issue-11/Android-Espresso%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.md" target="_blank" rel="external">Android Espresso 测试框架介绍</a></p>
+<blockquote>
+<p>Espresso 是一个提供了简单 API 的用于 android app UI 测试的测试框架。</p>
 <hr>
 <p>是Google的开源自动化测试框架。相对于Robotium和UIAutomator，它的特点是规模更小、更简洁，API更加精确，编写测试代码简单，容易快速上手。因为是基于Instrumentation的，所以不能跨App。</p>
 </blockquote>
@@ -460,7 +463,7 @@
 <hr>
 <p>也是基于Instrumentation的测试框架，目前国内外用的比较多，资料比较多，社区也比较活跃。缺点是对测试人员来说要有一定的Java基础，了解Android基本组件，不能跨App。</p>
 </blockquote>
-<h2 id="Athrun"><a href="#Athrun" class="headerlink" title="Athrun"></a>Athrun</h2><p><strong>Athrun</strong>是淘宝出的一个移动测试框架/平台，同时支持iOS和Android。Android部分也是基于Instrumentation，在Android原有的ActivityInstrumentationTestCase2类基础上进行了扩展，提供一整套面向对象的API。<a href="//link.zhihu.com/?target=http%3A//code.taobao.org/p/athrun/wiki/index/">这里**</a>有详细介绍。作者：Li7tleMK链接：<a href="https://www.zhihu.com/question/19716849/answer/42525356来源：知乎著作权归作者所有，转载请联系作者获得授权。" target="_blank" rel="external">https://www.zhihu.com/question/19716849/answer/42525356来源：知乎著作权归作者所有，转载请联系作者获得授权。</a></p>
+<h2 id="Athrun"><a href="#Athrun" class="headerlink" title="Athrun"></a>Athrun</h2><p><strong>Athrun</strong>是淘宝出的一个移动测试框架平台，同时支持iOS和Android。Android部分也是基于Instrumentation，在Android原有的ActivityInstrumentationTestCase2类基础上进行了扩展，提供一整套面向对象的API。<a href="//link.zhihu.com/?target=http%3A//code.taobao.org/p/athrun/wiki/index/">这里**</a>有详细介绍。作者：Li7tleMK链接：<a href="https://www.zhihu.com/question/19716849/answer/42525356来源：知乎著作权归作者所有，转载请联系作者获得授权。" target="_blank" rel="external">https://www.zhihu.com/question/19716849/answer/42525356来源：知乎著作权归作者所有，转载请联系作者获得授权。</a></p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="http://www.jianshu.com/p/1af4f4f4bf4a" target="_blank" rel="external">你应该知道的5个Android自动测试工具</a><br><a href="http://blog.zhaiyifan.cn/2016/02/23/world-class-testing-development-pipeline-for-android-part-2/" target="_blank" rel="external">世界级的Android测试开发流程（二）</a><br><a href="http://tmq.qq.com/2016/06/androidautotestframwork-uiautomator/" target="_blank" rel="external">5小时搞定谷歌原生自动化框架UiAutomator1.0</a><br><a href="http://www.jianshu.com/p/813503a1d69d#" target="_blank" rel="external">手把手教你Android标准App的四大自动化测试法宝</a></p>
 
       
