@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自动化测试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 自动化测试相关研究">
+<meta property="og:url" content="https://yanxinmiao.github.io/2017/01/20/Android-自动化测试相关研究/index.html">
+<meta property="og:site_name" content="Android技术博客">
+<meta property="og:description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
+<meta property="og:updated_time" content="2017-01-20T07:37:22.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 自动化测试相关研究">
+<meta name="twitter:description" content="做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yanxinmiao.github.io/2017/01/20/Android-自动化测试相关研究/"/>
+
+
+
+
+
+  <title> Android 自动化测试相关研究 | Android技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Android技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">记录自己成长的每一步</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://yanxinmiao.github.io/2017/01/20/Android-自动化测试相关研究/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="皇马船长">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/5194620?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Android技术博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Android技术博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android 自动化测试相关研究
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-20T15:34:28+08:00">
+                2017-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>做android开发也很长时间了，一直没有对自动化测试做过研究，这段时间不是很忙， 就先对想用的几个框架做下简单了解，日后在项目中逐步的去实践一下 。</p>
+<a id="more"></a>
+<h4 id="稳定性测试利器-——-Monkey"><a href="#稳定性测试利器-——-Monkey" class="headerlink" title="稳定性测试利器 —— Monkey"></a>稳定性测试利器 —— Monkey</h4><p><a href="http://www.cnblogs.com/yyangblog/archive/2011/03/10/1980068.html" target="_blank" rel="external">Android自动测试之Monkey工具</a><br><a href="http://www.cnblogs.com/findyou/p/3936063.html" target="_blank" rel="external">Monkey信息自动收集脚本</a><br><a href="http://blog.csdn.net/huangbiao86/article/details/8490743" target="_blank" rel="external"><a href="http://blog.csdn.net/huangbiao86/article/details/8490743" target="_blank" rel="external">Android命令Monkey压力测试，详解</a></a><br><a href="http://ihongqiqu.com/2015/12/24/Android-Monkey-Test/" target="_blank" rel="external">Android Monkey Test</a>：monkey各个命令解释的很详细</p>
+<blockquote>
+<p>要想发布一个新版本，得先通过稳定性测试。理想情况是找个上幼儿园的弟弟妹妹，打开应用把手机交给他，让他胡乱的玩，看你的程序能不能接受这样的折腾。但是我们身边不可能都有正太和萝莉，也不能保证他们拿到手机后不是测试软件的健壮性，反而测试你的手机经不经摔，这与我们的期望差太远了…<br>Google公司考虑到我们的需要，开发出了Monkey这个工具。但在很多人的印象中，Monkey测试就是让设备随机的乱点，事件都是随机产生的，不带任何人的主观性。很少有人知道，其实Monkey也可以用来做简单的自动化测试工作。</p>
+<hr>
+<p>Monkey测试是Android平台自动化测试的一种手段，通过Monkey程序模拟用户触摸屏幕、滑动Trackball、按键等操作来对设备上的程序进行压力测试，检测程序多久的时间会发生异常。</p>
+<hr>
+<p>Monkey是Android中的一个命令行工具，可以运行在模拟器里或实际设备中。monkey主要应用在压力和可靠性测试上，运行该命令可以随机地向目标程序发送各种模拟键盘事件流，并且可以自己定义发送的次数，以此观察被测应用程序的稳定性和可靠性，应用起来也比较简单，记住那几个命令就行了</p>
+<hr>
+<ul>
+<li>Monkey程序由Android系统自带，使用Java语言写成，在Android文件系统中的存放路径是：/system/framework/monkey.jar；</li>
+<li>Monkey.jar程序是由一个名为“monkey”的Shell脚本来启动执行，shell脚本在Android文件系统中的存放路径是：/system/bin/monkey；</li>
+</ul>
+</blockquote>
+<p>这样就可以通过在CMD窗口中执行: adb shell monkey ｛+命令参数｝来进行Monkey测试了。 </p>
+<p>简单使用<br>连上设备，执行adb shell ——&gt; ls data/data ，查看可测试的应用程序包列表 ，然后执行monkey测试命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -p com.android.calculator2 -v 500</div></pre></td></tr></table></figure></p>
+<p>对几个常用命令做下解释：</p>
+<h4 id="常规命令"><a href="#常规命令" class="headerlink" title="常规命令"></a>常规命令</h4><ul>
+<li><p>-help 列出简单用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -help</div></pre></td></tr></table></figure>
+</li>
+<li><p>–v 用于指定反馈信息级别（信息级别就是日志的详细程度），总共分3个级别，分别对应的参数如下表所示：</p>
+<ul>
+<li>日志级别 Level0<br>示例 adb shellmonkey -p com.htc.Weather –v 100<br>说明 缺省值，仅提供启动提示、测试完成和最终结果等少量信息</li>
+<li>日志级别 Level 1<br>示例 adb shellmonkey -p com.htc.Weather –v -v 100<br>说明  提供较为详细的日志，包括每个发送到Activity的事件信息</li>
+<li>日志级别 Level 2<br>示例 adb shellmonkey -p com.htc.Weather –v -v –v 100<br>说明  最详细的日志，包括了测试中选中/未选中的Activity信息</li>
+</ul>
+</li>
+</ul>
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><ul>
+<li>参数 -s 用于指定伪随机数生成器的seed值，如果seed相同，则两次Monkey测试所产生的事件序列也相同的。<br>示例：<br>　Monkey测试1：adb shell monkey -p com.htc.Weather –s 10 100<br>  Monkey 测试2：adb shell monkey -p com.htc.Weather–s 10 100<br> 两次测试的效果是相同的，因为模拟的用户操作序列（每次操作按照一定的先后顺序所组成的一系列操作，即一个序列）是一样的。操作序列虽   然是随机生成的，但是只要我们指定了相同的Seed值，就可以保证两次测试产生的随机操作序列是完全相同的，所以这个操作序列伪随机的。</li>
+<li>–throttle <milliseconds><br>在事件之间插入固定的时间（毫秒）延迟，你可以使用这个设置来减缓Monkey的运行速度，如果你不指定这个参数，则事件之间将没有延迟，事件将以最快的速度生成。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey --throttle 300 -v 10</div></pre></td></tr></table></figure>
+</milliseconds></li>
+</ul>
+<p>注：常用参数，一般设置为300毫秒，原因是实际用户操作的最快300毫秒左右一个动作事件，所以此处一般设置为300毫秒。</p>
+<h4 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h4><ul>
+<li><p>其中-p用于约束限制，用此参数指定一个或多个包（Package，即App）。指定包之后，Monkey将只允许系统启动指定的APP ，允许访问这些包中的Activity。如果不指定包，Monkey将允许系统启动设备中的所有APP。</p>
+<ul>
+<li>指定一个包： adb shell monkey -p com.htc.Weather 100<br>说明：com.htc.Weather为包名，100是事件计数（即让Monkey程序模拟100次随机用户事件）。</li>
+<li>指定多个包：adb shell monkey -p com.htc.Weather –p com.htc.pdfreader  -p com.htc.photo.widgets 100</li>
+</ul>
+</li>
+<li><p>其他配置项</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--ignore-crashes</div></pre></td></tr></table></figure>
+<p>作用：通常，应用发生崩溃或异常时Monkey会停止运行。如果设置此项，Monkey将继续发送事件给系统，直到事件计数完成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--ignore-security-exception</div></pre></td></tr></table></figure>
+<p>作用：通常，当程序发生许可错误（例如启动一些需要许可的Activity）导致的异常时，Monkey将停止运行。设置此项，Monkey将继续发送事件给系统，直到事件计数完成。</p>
+<ul>
+<li>记录测试日志</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -p com.ihongqiqu --throttle 300 -v -v -v 500 &gt; monkeytest.txt</div></pre></td></tr></table></figure>
+<p>monkey测试运行过程中，Emulator中的应用程序在不断地切换画面。<br>按照选定的不同级别的反馈信息，在Monkey中还可以看到其执行过程报告和生成的事件。 </p>
+<p>关于Monkey测试的停止条件<br>Monkey Test执行过程中在下列三种情况下会自动停止：</p>
+<ol>
+<li>如果限定了Monkey运行在一个或几个特定的包上，那么它会监测试图转到其它包的操作，并对其进行阻止。</li>
+<li>如果应用程序崩溃或接收到任何失控异常，Monkey将停止并报错。</li>
+<li>如果应用程序产生了应用程序不响应(application not responding)的错误，Monkey将会停止并报错。<br>通过多次并且不同设定下的Monkey测试才算它是一个稳定性足够的程序。 </li>
+</ol>
+<h6 id="使用脚本"><a href="#使用脚本" class="headerlink" title="使用脚本"></a>使用脚本</h6><p>先简单介绍下Monkey的API，若有需要详细了解的小伙伴，可自行百度或谷歌一下查阅哈。</p>
+<ul>
+<li>轨迹球事件：DispatchTrackball(参数1~参数12)</li>
+<li>输入字符串事件：DispatchString(String text)</li>
+<li>点击事件：DispatchPointer(参数1~参数12)</li>
+<li>启动应用：LaunchActivity(String pkg_name, String class_name)</li>
+<li>等待事件：UserWait(long sleeptime)</li>
+<li>按下键值：DispatchPress(int keyCode)</li>
+<li>长按键值：LongPress(int keyCode)</li>
+<li>发送键值：DispatchKey(参数1~参数8)</li>
+<li>打开软键盘：DispatchFlip(Boolean keyboardOpen)<br>了解完常用API后，我们来看一下Monkey脚本的编写规范。Monkey Script是按照一定的语法规则编写的有序的用户事件流，使用于Monkey命令工具的脚本。Monkey脚本一般以如下4条语句开头：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Start Script</div><div class="line">type = user    #指明脚本类型</div><div class="line">count = 10     #脚本执行次数</div><div class="line">speed = 1.0    #命令执行速率</div><div class="line">start data &gt;&gt;  #用户脚本入口，下面是用户自己编写的脚本</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编写完脚本之后，放到手机sd卡，执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell monkey -v -f /mnt/sdcard/HelloMonkey 1</div></pre></td></tr></table></figure></p>
+<p>脚本后面的数字1表示运行该脚本的次数</p>
+<h4 id="如何分析测试结果"><a href="#如何分析测试结果" class="headerlink" title="如何分析测试结果"></a>如何分析测试结果</h4><p>Monkey测试的og分析，我们可以通过几个关键词来判断测试是否通过。</p>
+<ol>
+<li>Monkey finished<br>打开LOG，查看log的最下端，是否有类似以下字段：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## Network stats: elapsed time=5123ms (5123ms mobile, 0ms wifi, 0ms not connected)</div><div class="line">// Monkey finished</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个字段表明本次的Monkey没有异常，测试通过。</p>
+<ol>
+<li><p>CRASH<br>同样，在得到LOG后，搜索”CRASH”字段，如果搜索到有结果，则表明有进程出现问题，测试不通过。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// CRASH: com.onekchi.downloadmanager (pid 12919)</div></pre></td></tr></table></figure>
+</li>
+<li><p>ANR<br>在Log中搜素该字段，如果有搜索有结果，则表示测试过程中，测试对象出现了无响应的现象，因此测试不通过。–throttle &lt;毫秒&gt;值建议为500</p>
+</li>
+</ol>
+<h6 id="Monkey总结"><a href="#Monkey总结" class="headerlink" title="Monkey总结"></a>Monkey总结</h6><p>Monkey可以编写脚本做简单的自动化测试，但局限性非常大，例如无法进行截屏操作，不能简单的支持插件的编写，没有好的办法控制事件流，不支持录制回放等。我们在平时的使用中，关注较多的是利用好Monkey的优势，如不需源码，不需编译就可以直接运行。</p>
+<h4 id="Monkey之子-——-MonkeyRunner"><a href="#Monkey之子-——-MonkeyRunner" class="headerlink" title="Monkey之子 —— MonkeyRunner"></a>Monkey之子 —— MonkeyRunner</h4><blockquote>
+<p>Monkey虽然能实现部分的自动化测试任务，但本身有很多的局限性，例如不支持截屏，点击事件是基于坐标的，不支持录制回放等。我们在实际应用中，尽量关注利用好Monkey测试的优势。若平时的工作中遇到Monkey工具无法满足的，这里给大家推荐另一款工具MonkeyRunner。</p>
+<hr>
+<p>monkeyrunner是android SDK中自带的工具之一，提供了API，使用此API写出的程序可以在Android代码之外控制Android设备和模拟器。通过monkeyrunner，您可以写出一个Python程序去安装一个Android应用程序或测试包，运行它，向它发送模拟击键，截取它的用户界面图片，并将截图存储于工作站上。monkeyrunner工具的主要设计目的是用于测试功能/框架水平上的应用程序和设备，或用于运行单元测试套件，但您当然也可以将其用于其它目的。</p>
+</blockquote>
+<p>优点：操作最为简单，可以录制测试脚本，可视化操作；<br>缺点：主要生成坐标的自动化操作，移植性不强，功能最为局限；脚本用Python来写，对测试人员来说要求较高，有比较大的学习成本。<br>和上面的monkey对比</p>
+<ul>
+<li>Monkey工具直接运行在设备或模拟器的adb shell中，生成用户或系统的伪随机事件流。</li>
+<li>monkeyrunner工具则是在工作站上通过API定义的特定命令和事件控制设备或模拟器。</li>
+</ul>
+<p>monkeyrunner，它主要可应用于功能测试，回归测试，并且可以自定义测试扩展，灵活性较强，并且测试人员可以完全控制。</p>
+<hr>
+<p>先简单的介绍下MonkeyRunner的API，这里重点介绍能够实现上文Monkey脚本的API，其余的API感兴趣的小伙伴可以自行查阅。</p>
+<ul>
+<li>等待设备连接：waitForConnection()</li>
+<li>安装apk应用：installPackage(String path)</li>
+<li>启动应用：startActivity(String packageName+activityName)</li>
+<li>点击事件：touch(int xPos, int yPos, dictionary type)</li>
+<li>输入事件：type(String text)</li>
+<li>等待：sleep(int second)</li>
+<li>截图：takeSnapshot()</li>
+<li>发送键值：press(String name, dictionary type)</li>
+</ul>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><p>MonkeyRunner有很多强大并好用的API，并且支持录制回放和截图操作。同样它也不需源码，不需编译就可以直接运行。但MonkeyRunner和Monkey类似，也是基于控件坐标进行定位的，在实际项目中，控件坐标往往是最不稳定的，随时都有可能因为程序员对控件位置的调整而导致脚本运行失败。</p>
+<h4 id="Rubotium"><a href="#Rubotium" class="headerlink" title="Rubotium"></a>Rubotium</h4><blockquote>
+<p>要针对某一个APK进行自动化测试，APK可以有源码，也可以没有源码，功能强大；缺点是针对APK操作，而且需要对APK重新签名（有工具），因此操作相对复杂；</p>
+</blockquote>
+<h4 id="Espresso"><a href="#Espresso" class="headerlink" title="Espresso"></a>Espresso</h4><p><a href="https://testerhome.com/wiki/espresso" target="_blank" rel="external">Espresso 官方文档</a><br><a href="https://github.com/hehonghui/android-tech-frontier/blob/master/issue-11/Android-Espresso%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.md" target="_blank" rel="external">Android Espresso 测试框架介绍</a></p>
+<blockquote>
+<p>Espresso 是一个提供了简单 API 的用于 android app UI 测试的测试框架。</p>
+<hr>
+<p>是Google的开源自动化测试框架。相对于Robotium和UIAutomator，它的特点是规模更小、更简洁，API更加精确，编写测试代码简单，容易快速上手。因为是基于Instrumentation的，所以不能跨App。</p>
+</blockquote>
+<h4 id="终极自动化测试框架-——-UI-Automator"><a href="#终极自动化测试框架-——-UI-Automator" class="headerlink" title="终极自动化测试框架 —— UI Automator"></a>终极自动化测试框架 —— <a href="http://developer.android.com/tools/help/uiautomator/index.html" target="_blank" rel="external">UI Automator</a></h4><blockquote>
+<p>在Android 4.1发布的时候包含了一种新的测试工具–[uiautomator]<br> 优点：可以对所有操作进行自动化，操作简单；<br>缺点：Android版本需要高于4.0，无法根据控件ID操作，相对来说功能较为局限，但也够用了</p>
+<hr>
+<p>也是基于Instrumentation的测试框架，目前国内外用的比较多，资料比较多，社区也比较活跃。缺点是对测试人员来说要有一定的Java基础，了解Android基本组件，不能跨App。</p>
+</blockquote>
+<h2 id="Athrun"><a href="#Athrun" class="headerlink" title="Athrun"></a>Athrun</h2><p><strong>Athrun</strong>是淘宝出的一个移动测试框架/平台，同时支持iOS和Android。Android部分也是基于Instrumentation，在Android原有的ActivityInstrumentationTestCase2类基础上进行了扩展，提供一整套面向对象的API。<a href="//link.zhihu.com/?target=http%3A//code.taobao.org/p/athrun/wiki/index/">这里**</a>有详细介绍。作者：Li7tleMK链接：<a href="https://www.zhihu.com/question/19716849/answer/42525356来源：知乎著作权归作者所有，转载请联系作者获得授权。" target="_blank" rel="external">https://www.zhihu.com/question/19716849/answer/42525356来源：知乎著作权归作者所有，转载请联系作者获得授权。</a></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="http://www.jianshu.com/p/1af4f4f4bf4a" target="_blank" rel="external">你应该知道的5个Android自动测试工具</a><br><a href="http://blog.zhaiyifan.cn/2016/02/23/world-class-testing-development-pipeline-for-android-part-2/" target="_blank" rel="external">世界级的Android测试开发流程（二）</a><br><a href="http://tmq.qq.com/2016/06/androidautotestframwork-uiautomator/" target="_blank" rel="external">5小时搞定谷歌原生自动化框架UiAutomator1.0</a><br><a href="http://www.jianshu.com/p/813503a1d69d#" target="_blank" rel="external">手把手教你Android标准App的四大自动化测试法宝</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自动化测试/" rel="tag"># 自动化测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/16/Android-内存管理/" rel="next" title="Android 内存管理">
+                <i class="fa fa-chevron-left"></i> Android 内存管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/5194620?v=3&s=460"
+               alt="皇马船长" />
+          <p class="site-author-name" itemprop="name">皇马船长</p>
+          <p class="site-description motion-element" itemprop="description">跌倒是种成长，哭是一种释放</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#稳定性测试利器-——-Monkey"><span class="nav-number">1.</span> <span class="nav-text">稳定性测试利器 —— Monkey</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常规命令"><span class="nav-number">2.</span> <span class="nav-text">常规命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件"><span class="nav-number">3.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束条件"><span class="nav-number">4.</span> <span class="nav-text">约束条件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#使用脚本"><span class="nav-number">4.0.1.</span> <span class="nav-text">使用脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何分析测试结果"><span class="nav-number">5.</span> <span class="nav-text">如何分析测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Monkey总结"><span class="nav-number">5.0.1.</span> <span class="nav-text">Monkey总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monkey之子-——-MonkeyRunner"><span class="nav-number">6.</span> <span class="nav-text">Monkey之子 —— MonkeyRunner</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#总结"><span class="nav-number">6.0.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rubotium"><span class="nav-number">7.</span> <span class="nav-text">Rubotium</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Espresso"><span class="nav-number">8.</span> <span class="nav-text">Espresso</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终极自动化测试框架-——-UI-Automator"><span class="nav-number">9.</span> <span class="nav-text">终极自动化测试框架 —— UI Automator</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Athrun"><span class="nav-number"></span> <span class="nav-text">Athrun</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number"></span> <span class="nav-text">参考文档</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">皇马船长</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
