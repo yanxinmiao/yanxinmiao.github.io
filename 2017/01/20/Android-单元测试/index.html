@@ -1,0 +1,721 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="测试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="平时单元测试写得比较少，以至于现在都有点陌生了，现在简单做下整理，记录下来方便日后复习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 单元测试">
+<meta property="og:url" content="https://yanxinmiao.github.io/2017/01/20/Android-单元测试/index.html">
+<meta property="og:site_name" content="Android技术博客">
+<meta property="og:description" content="平时单元测试写得比较少，以至于现在都有点陌生了，现在简单做下整理，记录下来方便日后复习。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-53af60f50b520d8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-9d72cd66a75faf2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-6d3108795447828a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-3aec3c7545d450d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1951128-b3a60ad954adbb9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640">
+<meta property="og:updated_time" content="2017-01-20T08:06:09.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 单元测试">
+<meta name="twitter:description" content="平时单元测试写得比较少，以至于现在都有点陌生了，现在简单做下整理，记录下来方便日后复习。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1951128-53af60f50b520d8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yanxinmiao.github.io/2017/01/20/Android-单元测试/"/>
+
+
+
+
+
+  <title> Android 单元测试 | Android技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Android技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">记录自己成长的每一步</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://yanxinmiao.github.io/2017/01/20/Android-单元测试/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="皇马船长">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/5194620?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Android技术博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Android技术博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android 单元测试
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-20T16:03:28+08:00">
+                2017-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>平时单元测试写得比较少，以至于现在都有点陌生了，现在简单做下整理，记录下来方便日后复习。</p>
+<a id="more"></a>
+<h2 id="使用Android-Studio进行单元测试"><a href="#使用Android-Studio进行单元测试" class="headerlink" title="使用Android Studio进行单元测试"></a>使用Android Studio进行单元测试</h2><p>android studio的单元测试由于只是模拟android开发环境，但是其不是真正的android开发环境，所以不能测试UI功能，不能测试需要硬件支持的功能（比如蓝牙，wifi等），不能测试App跳转等等，那么其可以测试那些内容呢？</p>
+<ul>
+<li>测试一些数据性的功能，比如加载网络数据</li>
+<li>测试SharedPerferences，测试数据库，测试函数等</li>
+<li>工具类的测试，比如验证时间，转化格式，正则验证等等</li>
+</ul>
+<p>在Android Studio中进行单元测试并不需要什么插件或者过多的配置，Android Studio本身就集成了测试环境，无论是单纯的java代码单元测试还是依赖Android SDK的Android代码单元测试都可以。</p>
+<hr>
+<p>Android单元测试框架主要有：JUnit和Robolectric，本文就不详细介绍。<br><strong>1. 使用JUnit进行单元测试</strong><br>参考：<a href="http://www.open-open.com/lib/view/open1328152424546.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1328152424546.html</a><br><strong>2. Robolectric</strong><br><a href="http://robolectric.org/getting-started/" target="_blank" rel="external">http://robolectric.org/getting-started/</a><br>在安卓模拟器或者真机上跑测试用例速度很慢。构建、部署、启动app，通常需要花费很久。Robolectric提供一种更好的方式，它模拟了android sdk中的jar包，可以直接在jvm中运行测试用例，这样就大大节省了时间。<br>另外，使用JUnit对fragment进行单元测试，可以参考该文章：<a href="http://blog.denevell.org/android-testing-fragments.html" target="_blank" rel="external">http://blog.denevell.org/android-testing-fragments.html</a></p>
+<hr>
+<p>首先我们需要明确安卓的单元测试主要分为两种类型：</p>
+<ul>
+<li>在开发主机Java虚拟机上运行的Junit Test</li>
+<li>在Android真机或者虚拟机上运行的Instrumented unit tests</li>
+</ul>
+<p>因为Junit Test免去了将apk包安装到android设备上的步骤，因此速度上会比Instrumented unit tests快很多。但是跟android相关的一些库只能运行在android设备上，而无法再本机Java虚拟机上运行，比如很多包名中带android的库。因此我们这里需要做一个选择，如果某些类没有用到android相关的库，则完全可以使用Junit Test，加快测试速率。</p>
+<hr>
+<p>我们新创建一个工程后，项目在Android Studio的Project中应该是这样的,其中androidTest包中存放的是Instrumented unit tests的文件，而test中则是Junit Test，这两个文件夹在项目创建的时候AS都会帮我们创建好：<br><img src="http://upload-images.jianshu.io/upload_images/1951128-53af60f50b520d8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ截图20170118141231.png"></p>
+<p>分析一下：<br>（1）androidTest这个文件夹里的测试类主要是对android的例子进行单元测试。需要运行于设备之上。<br>（2）test这个文件夹的测试类主要对java的例子进行单元测试，无需运行于设备之上。</p>
+<p>在你的gradle中加入Junit的依赖，注意这里的依赖方式是测试期间的依赖（testCompile）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">testCompile &apos;junit:junit:4.12&apos;</div></pre></td></tr></table></figure></p>
+<h4 id="编写java测试用例"><a href="#编写java测试用例" class="headerlink" title="编写java测试用例"></a>编写java测试用例</h4><p>如果所写的测试代码没有使用android sdk（android.<em>*</em>下的代码），那么可以在test目录下新建，本例中即为ExampleUnitTes</p>
+<p><strong>注意测试用例即一个public void的方法，并且加上@Test注解，这是Junit的标准用法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class ExampleUnitTest &#123;</div><div class="line">    @Test</div><div class="line">    public void addition_isCorrect() throws Exception &#123;</div><div class="line">        assertEquals(4, 2 + 2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编写好测试代码后，有如下两种方法运行</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1951128-9d72cd66a75faf2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="QQ截图20170118141829.png"></p>
+<p>成功的例子<br><img src="http://upload-images.jianshu.io/upload_images/1951128-6d3108795447828a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="QQ截图20170118141733.png"></p>
+<p>失败的例子</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1951128-3aec3c7545d450d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="QQ截图20170118162359.png"></p>
+<p>还有一种失败的情况 ，因为用了Android的代码，所以这样子了，这就引出我们的Android测试例子。<br><img src="http://upload-images.jianshu.io/upload_images/1951128-b3a60ad954adbb9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640" alt="QQ截图20170118162444.png"></p>
+<h4 id="编写Android测试用例"><a href="#编写Android测试用例" class="headerlink" title="编写Android测试用例"></a>编写Android测试用例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by dell on 2017/1/18.</div><div class="line"> *</div><div class="line"> *  测试用例类需要使用注解：<span class="doctag">@MediumTest</span>和<span class="doctag">@RunWith</span>(AndroidJUnit4.class)</div><div class="line"> */</div><div class="line"><span class="meta">@MediumTest</span></div><div class="line"><span class="meta">@RunWith</span>(AndroidJUnit4.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MTest</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *</div><div class="line">     * 我们在编写测试函数的时候需要注意两点：</div><div class="line"></div><div class="line">         测试函数需要为public</div><div class="line">         测试函数需要添加<span class="doctag">@Test</span>注解</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Context of the app under test.</span></div><div class="line">        Context appContext = InstrumentationRegistry.getTargetContext();</div><div class="line">        assertEquals(<span class="string">"uuch.com.android_activityanim"</span>, appContext.getPackageName());</div><div class="line"></div><div class="line">        Log.i(<span class="string">"tag"</span>, <span class="string">"$"</span>);</div><div class="line">        assertEquals(<span class="string">"result:"</span>, <span class="number">123</span>, <span class="number">100</span> + <span class="number">33</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行方式和以上 java测试用例一样。</p>
+<h2 id="常见的单元测试框架"><a href="#常见的单元测试框架" class="headerlink" title="常见的单元测试框架"></a>常见的单元测试框架</h2><h4 id="JUnit4"><a href="#JUnit4" class="headerlink" title="JUnit4"></a>JUnit4</h4><p>这是Java界用的最广泛，也是最基础的一个框架 。在Android项目里面使用JUnit是很简单的，你只需要将JUnit这个library加到你的dependencies里面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">testCompile &apos;junit:junit:4.12&apos;</div></pre></td></tr></table></figure></p>
+<p>如果你通过AndroidStudio创建一个项目，这个dependency默认是加上了的，所以你甚至这步都可以省略。</p>
+<p>上面java测试用例就是用得这个框架，相对来说是比较简单，也是比较容易理解的 。其中Assert部分，可以帮我们验证一个方法的返回结果。然而，这些只能帮我们测试有返回值的那些方法；没有返回值的方法，即void方法，则要通过另外一个框架，Mockito，来验证它的正确性</p>
+<h4 id="Mockito"><a href="#Mockito" class="headerlink" title="Mockito"></a><a href="http://mockito.org/" target="_blank" rel="external">Mockito</a></h4><p>这个是Java界使用最广泛的一个mock框架。</p>
+<h4 id="Robolectric3-0"><a href="#Robolectric3-0" class="headerlink" title="Robolectric3.0"></a>Robolectric3.0</h4><blockquote>
+<p><a href="http://robolectric.org/" target="_blank" rel="external">官网地址</a><br><a href="https://github.com/robolectric/robolectric" target="_blank" rel="external">Github地址</a><br><a href="http://xuxu1988.com/2015/05/23/robolectric-01/?utm_source=tuicool" target="_blank" rel="external">Robolectric环境搭建(Android Studio + Gradle)</a><br><a href="https://www.diycode.cc/topics/377" target="_blank" rel="external">Android 单元测试–Robolectric</a></p>
+</blockquote>
+<p>Instrumentation与Roboletric都是针对 Android 进行单元测试的框架，前者在执行 case 时候是以 Android JUnit 的方式运行，因此必须在真实的 Android 环境中运行（模拟器或者真机），而后者则是以 Java Junit 的方式运行，这里就脱离了对 Android 环境的依赖，而可以直接将 case 在 JVM 中运行，大赞，因此很适合将 Roboletric 用于 Android 的测试驱动开发。</p>
+<hr>
+<p><strong>官网介绍</strong><br>Running tests on an Android emulator or device is slow! Building, deploying, and launching the app often takes a minute or more. That’s no way to do TDD. There must be a better way.<br>Wouldn’t it be nice to run your Android tests directly from inside your IDE? Perhaps you’ve tried, and been thwarted by the dreaded java.lang.RuntimeException: Stub!?<br>Robolectric is a unit test framework that de-fangs the Android SDK jar so you can test-drive the development of your Android app. Tests run inside the JVM on your workstation in seconds. With Robolectric you can write tests like this:</p>
+<p>对于Android app来说，写起单元测试来瞻前顾后，一方面单元测试需要运行在模拟器上或者真机上，麻烦而且缓慢，另一方面，一些依赖Android SDK的对象（如Activity，TextView等）的测试非常头疼，Robolectric可以解决此类问题，它的设计思路便是通过实现一套JVM能运行的Android代码，从而做到脱离Android环境进行测试。</p>
+<p><strong>使用</strong><br>在app/gradle中加入依赖关系<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    testCompile &quot;org.robolectric:robolectric:3.2.2&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在app/src/test 目录下，创建测试用例 ，运行方式和上面的一样， 第一次会比较慢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@RunWith(RobolectricTestRunner.class)</div><div class="line">@Config(constants = BuildConfig.class,sdk = 19)</div><div class="line">public class JustTest &#123;</div><div class="line"></div><div class="line">    @Before</div><div class="line">    public void setUp() throws URISyntaxException &#123;</div><div class="line">        //输出日志</div><div class="line">        ShadowLog.stream = System.out;</div><div class="line">    &#125;</div><div class="line">    @Test</div><div class="line">    public void testActivity() &#123;</div><div class="line">        MainActivity sampleActivity = Robolectric.setupActivity(MainActivity.class);//创建Activity</div><div class="line">        Log.i(&quot;&quot;,&quot;_____________&quot; + sampleActivity.getClass().getSimpleName());</div><div class="line">        Assert.assertNotNull(sampleActivity);//判断是否为空</div><div class="line">        Assert.assertEquals(sampleActivity.getClass().getSimpleName(), &quot;MainActivity&quot;);//获取Activity的标题</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果想要支持Fragment<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//    如果使用support的Fragment，需添加以下依赖</div><div class="line">    testCompile &apos;org.robolectric:shadows-support-v4:3.1.2&apos;</div></pre></td></tr></table></figure></p>
+<p>shadow-support包提供了将Fragment主动添加到Activity中的方法：SupportFragmentTestUtil.startFragment(),简易的测试代码如下</p>
+<h4 id="Instrumentation"><a href="#Instrumentation" class="headerlink" title="Instrumentation"></a>Instrumentation</h4><p><a href="http://xuxu1988.com/2015/05/14/2015-05-02-Instrumentation01/" target="_blank" rel="external">Android Instrumentation简介</a></p>
+<blockquote>
+<p>Instrumentation框架主要是依靠控件的ID来进行定位的，拥有成熟的用例管理系统，是Android主推的白盒测试框架。若想对项目进行深入的、系统的单元测试，基本上都离不开Instrumentation这把屠龙宝刀。</p>
+</blockquote>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="http://www.jianshu.com/p/9d988a2f8ff7" target="_blank" rel="external">Android单元测试框架Robolectric3.0介绍(一)</a><br><a href="https://github.com/xitu/gold-miner/blob/master/TODO/Unit-tests-with-Mockito.md" target="_blank" rel="external">使用强大的 Mockito 测试框架来测试你的代码</a><br><a href="https://github.com/facebook/network-connection-class" target="_blank" rel="external">FaceBook 开源的一个测试网络访问速度的库，适用于安卓 APP</a><br><a href="https://github.com/hehonghui/android-tech-frontier/blob/master/issue-11/Android-Espresso%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.md" target="_blank" rel="external">Android Espresso 测试框架介绍</a><br><a href="http://www.jianshu.com/p/03118c11c199" target="_blank" rel="external">在Android Studio中进行单元测试和UI测试</a><br><a href="http://tech.meituan.com/Android_unit_test.html" target="_blank" rel="external">Android单元测试研究与实践</a><br><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html" target="_blank" rel="external">Android developer 测试支持库</a><br><a href="http://www.open-open.com/lib/view/open1328152424546.html" target="_blank" rel="external">要了解android单元测试，首先必须了解junit</a><br><a href="http://www.jianshu.com/p/9d988a2f8ff7" target="_blank" rel="external">Android单元测试框架Robolectric3.0介绍(一)</a><br><a href="http://chriszou.com/2016/06/07/android-unit-testing-everything-you-need-to-know.html" target="_blank" rel="external">关于安卓单元测试，你需要知道的一切</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/测试/" rel="tag"># 测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/20/Android-自动化测试相关研究/" rel="next" title="Android 自动化测试相关研究">
+                <i class="fa fa-chevron-left"></i> Android 自动化测试相关研究
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/5194620?v=3&s=460"
+               alt="皇马船长" />
+          <p class="site-author-name" itemprop="name">皇马船长</p>
+          <p class="site-description motion-element" itemprop="description">跌倒是种成长，哭是一种释放</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Android-Studio进行单元测试"><span class="nav-number">1.</span> <span class="nav-text">使用Android Studio进行单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编写java测试用例"><span class="nav-number">1.0.1.</span> <span class="nav-text">编写java测试用例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写Android测试用例"><span class="nav-number">1.0.2.</span> <span class="nav-text">编写Android测试用例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的单元测试框架"><span class="nav-number">2.</span> <span class="nav-text">常见的单元测试框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JUnit4"><span class="nav-number">2.0.1.</span> <span class="nav-text">JUnit4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mockito"><span class="nav-number">2.0.2.</span> <span class="nav-text">Mockito</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Robolectric3-0"><span class="nav-number">2.0.3.</span> <span class="nav-text">Robolectric3.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Instrumentation"><span class="nav-number">2.0.4.</span> <span class="nav-text">Instrumentation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">皇马船长</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
